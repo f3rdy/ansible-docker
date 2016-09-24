@@ -6,6 +6,7 @@ RUN yum -y install epel-release && \
     yum -y update && \
     yum -y install openssl-devel libffi-devel python python-pip python-devel \
                    gcc libyaml-devel && \
-    pip install httplib2 ansible && \
+    pip install --upgrade pip && \
+    pip install cryptography httplib2 ansible && \
     yum -y clean all && \
     rm -rf ~/.pip/cache
