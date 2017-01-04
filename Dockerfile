@@ -1,12 +1,11 @@
-FROM centos:7
+FROM debian:jessie
 
 MAINTAINER Fred Thiele <ferdy_news@gmx.de>
 
-RUN yum -y install epel-release && \
-    yum -y update && \
-    yum -y install openssl-devel libffi-devel python python-pip python-devel \
-                   gcc libyaml-devel && \
+RUN apt-get -y update && apt-get -y upgrade && \
+    apt-get -y install libssl-dev libffi-dev python python-pip python-dev gcc libyaml-dev && \
     pip install --upgrade pip && \
     pip install cryptography httplib2 ansible && \
-    yum -y clean all && \
-    rm -rf ~/.pip/cache
+    apt-get remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
+    rm -rf /var/lib/apt/lists/*
+
