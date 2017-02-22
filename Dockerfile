@@ -1,12 +1,10 @@
-FROM centos:7
+FROM opensuse:42.2 
 
 MAINTAINER Fred Thiele <ferdy_news@gmx.de>
 
-RUN yum -y install epel-release && \
-    yum -y update && \
-    yum -y install openssl-devel libffi-devel python python-pip python-devel \
-                   gcc libyaml-devel && \
+RUN zypper -n install openssl-devel libffi-devel python python-pip python-devel \
+                      gcc libyaml-devel && \
     pip install --upgrade pip && \
     pip install cryptography httplib2 ansible && \
-    yum -y clean all && \
+    zypper -n clean && \
     rm -rf ~/.pip/cache
